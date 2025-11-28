@@ -1,21 +1,39 @@
 import os
+import sys
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
-load_dotenv()
-API_KEY = os.getenv("GEMINI_API_KEY")
+def main():
 
-os.environ.get
+    load_dotenv()
+    API_KEY = os.getenv("GEMINI_API_KEY")
 
-client = genai.Client(
-    api_key=API_KEY
-)
+    client = genai.Client(
+        api_key=API_KEY
+    )
 
-response = client.models.generate_content(
-    model="gemini-2.5-flash", contents="my name is uzair"
-)
+    # print(sys.argv) # argv[0] - main.py
 
-print(response.text)
+    if len(sys.argv) < 2:
+        print("I need a prompt")
+        sys.exit(1)
+    verbose_flag = False
+    if len(sys.argv) == 3 and sys.argv[2] == "--verbose":
+        verbose_flag = True
+    prompt = sys.argv[1]
 
-print("prompt token:",response.usage_metadata.prompt_token_count)
-print("response token:",response.usage_metadata.candidates_token_count)
+    messages = [
+        types.Content(role="user", parts=[types.Part(text=prompt)])
+    ]
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash", contents=messages
+    )
+
+    print(response.text)
+    if verbose_flag:
+        print("prompt token:",response.usage_metadata.prompt_token_count) # get the no of tokens used in prompting
+        print("response token:",response.usage_metadata.candidates_token_count) # get the no of tokens in response
+
+main()
