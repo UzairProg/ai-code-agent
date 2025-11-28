@@ -3,6 +3,7 @@ import sys
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from AiCodeAgent.functions.functions.get_files_info import get_files_info # from  dir.name_of_file import func_name
 
 def main():
 
@@ -23,17 +24,20 @@ def main():
         verbose_flag = True
     prompt = sys.argv[1]
 
-    messages = [
-        types.Content(role="user", parts=[types.Part(text=prompt)])
-    ]
+    result = get_files_info("./", "calculator")
+    print(result)
+    # messages = [
+    #     types.Content(role="user", parts=[types.Part(text=prompt)])
+    # ]
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash", contents=messages
-    )
+    # response = client.models.generate_content(
+    #     model="gemini-2.5-flash", contents=messages
+    # )
 
-    print(response.text)
-    if verbose_flag:
-        print("prompt token:",response.usage_metadata.prompt_token_count) # get the no of tokens used in prompting
-        print("response token:",response.usage_metadata.candidates_token_count) # get the no of tokens in response
+    # print(response.text)
+
+    # if verbose_flag:
+        # print("prompt token:",response.usage_metadata.prompt_token_count) # get the no of tokens used in prompting
+        # print("response token:",response.usage_metadata.candidates_token_count) # get the no of tokens in response
 
 main()
