@@ -5,9 +5,9 @@ from functions.write_file import write_file
 def main():
     # print(write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum"))
     # print("\n\n")
-    # print(write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet"))
+    print(write_file("calculator", "pkg2/morelorem.txt", "lorem ipsum dolor sit amet"))
     # print("\n\n")
-    print(write_file("calculator", "/tmp/temp.txt", "this should not be allowed"))
+    # print(write_file("calculator", "/tmp/temp.txt", "this should not be allowed"))
     # print("\n\n")
     # print(get_file_content("calculator", "pkg/does_not_exist.py"))
     # print(get_file_content("calculator", "lorem.txt"))
