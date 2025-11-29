@@ -4,7 +4,7 @@
 from functions.run_python_file import run_python_file
 
 def main():
-    print(run_python_file("calculator", "lorem.txt"))
+    print(run_python_file("calculator", "main.py", ["5 + 10"]))
     # print("\n\n")
     # print(write_file("calculator", "pkg2/morelorem.txt", "lorem ipsum dolor sit amet"))
     # print("\n\n")
